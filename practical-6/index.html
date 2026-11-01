@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pranav Kale | Marks Calculator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="min-h-screen flex justify-center items-center bg-[radial-gradient(circle_at_top,_#dbeafe,_#60a5fa_40%,_#312e81_100%)] p-4">
+
+    <div class="w-full max-w-4xl rounded-[2rem] border border-white/30 bg-white/15 p-6 shadow-2xl backdrop-blur-md md:p-8">
+        <div class="mb-6 text-center">
+            <span class="inline-block rounded-full border border-blue-200 bg-blue-100/80 px-4 py-1 text-xs font-bold uppercase tracking-[0.2em] text-blue-700">Academic Dashboard</span>
+            <h1 class="mt-4 text-3xl font-black text-white md:text-4xl">Pranav Kale</h1>
+            <p class="mt-2 text-blue-100">Practical No. 6 • Marks Calculator</p>
+        </div>
+
+        <div class="grid gap-6 md:grid-cols-[1.6fr_0.8fr]">
+            <table class="w-full overflow-hidden rounded-2xl border border-blue-200/60 bg-slate-50 shadow-lg">
+                <thead>
+                    <tr class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white">
+                        <th class="p-3 text-left">#</th>
+                        <th class="p-3 text-left">Subject</th>
+                        <th class="p-3 text-left">Marks</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="border-t border-slate-200">
+                        <td class="p-3 font-semibold text-slate-700">1</td>
+                        <td class="p-3 font-medium text-slate-700">AP</td>
+                        <td class="p-3"><input type="number" id="s1" placeholder="Enter Marks" class="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-200"></td>
+                    </tr>
+                    <tr class="border-t border-slate-200">
+                        <td class="p-3 font-semibold text-slate-700">2</td>
+                        <td class="p-3 font-medium text-slate-700">OOP</td>
+                        <td class="p-3"><input type="number" id="s2" placeholder="Enter Marks" class="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-200"></td>
+                    </tr>
+                    <tr class="border-t border-slate-200">
+                        <td class="p-3 font-semibold text-slate-700">3</td>
+                        <td class="p-3 font-medium text-slate-700">ED</td>
+                        <td class="p-3"><input type="number" id="s3" placeholder="Enter Marks" class="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-200"></td>
+                    </tr>
+                    <tr class="border-t border-slate-200">
+                        <td class="p-3 font-semibold text-slate-700">4</td>
+                        <td class="p-3 font-medium text-slate-700">CAO</td>
+                        <td class="p-3"><input type="number" id="s4" placeholder="Enter Marks" class="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-200"></td>
+                    </tr>
+                    <tr class="border-t border-slate-200">
+                        <td class="p-3 font-semibold text-slate-700">5</td>
+                        <td class="p-3 font-medium text-slate-700">DSA</td>
+                        <td class="p-3"><input type="number" id="s5" placeholder="Enter Marks" class="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-200"></td>
+                    </tr>
+                    <tr class="border-t border-slate-200">
+                        <td class="p-3 font-semibold text-slate-700">6</td>
+                        <td class="p-3 font-medium text-slate-700">CEP</td>
+                        <td class="p-3"><input type="number" id="s6" placeholder="Enter Marks" class="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-200"></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="flex flex-col justify-between gap-4 rounded-2xl bg-slate-950/30 p-5 text-white shadow-lg ring-1 ring-white/10">
+                <div>
+                    <h2 class="text-sm uppercase tracking-[0.25em] text-blue-200">Total</h2>
+                    <p id="totalMarks" class="mt-3 text-4xl font-black text-cyan-300">0</p>
+                </div>
+
+                <div>
+                    <h2 class="text-sm uppercase tracking-[0.25em] text-blue-200">Percentage</h2>
+                    <p id="percentage" class="mt-3 text-4xl font-black text-emerald-300">0%</p>
+                </div>
+
+                <button onclick="calc()" class="mt-2 rounded-xl bg-gradient-to-r from-blue-500 to-indigo-600 px-5 py-3 font-bold text-white shadow-lg transition hover:scale-[1.02] hover:shadow-blue-400/40">
+                    Calculate
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function calc() {
+            let sub1 = Number(document.getElementById("s1").value);
+            let sub2 = Number(document.getElementById("s2").value);
+            let sub3 = Number(document.getElementById("s3").value);
+            let sub4 = Number(document.getElementById("s4").value);
+            let sub5 = Number(document.getElementById("s5").value);
+            let sub6 = Number(document.getElementById("s6").value);
+
+            let TOTAL = sub1 + sub2 + sub3 + sub4 + sub5 + sub6;
+            let per = TOTAL / 6;
+
+            document.getElementById("totalMarks").innerHTML = TOTAL;
+            document.getElementById("percentage").innerHTML = per.toFixed(2) + "%";
+        }
+    </script>
+</body>
+</html>

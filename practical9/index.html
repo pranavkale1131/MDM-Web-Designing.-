@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pranav Kale | To-Do List</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="min-h-screen bg-[radial-gradient(circle_at_top,_#dbeafe,_#c4b5fd_35%,_#1e1b4b_100%)] flex items-center justify-center p-4">
+
+  <div class="w-full max-w-lg rounded-[2rem] border border-white/20 bg-white/10 p-6 shadow-2xl backdrop-blur-xl">
+    <div class="mb-6 text-center">
+      <span class="inline-block rounded-full bg-violet-500/20 px-3 py-1 text-xs font-bold uppercase tracking-[0.2em] text-violet-100">Planner</span>
+      <h1 class="mt-4 text-3xl font-black text-white">Pranav Kale's Task List</h1>
+      <p class="mt-2 text-sm text-violet-100/80">Organize your academic and personal tasks</p>
+    </div>
+
+    <div class="mb-5 flex gap-2">
+      <input
+        type="text"
+        id="taskInput"
+        placeholder="Enter a new task..."
+        class="flex-1 rounded-xl border border-violet-200/30 bg-slate-900/40 px-4 py-3 text-white placeholder:text-violet-100/40 outline-none transition focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/30"
+      >
+
+      <button
+        id="addTaskBtn"
+        class="rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 px-5 py-3 font-semibold text-white transition hover:scale-[1.02]"
+      >
+        Add
+      </button>
+    </div>
+
+    <div class="mb-3 flex items-center justify-between">
+      <h2 class="font-semibold text-violet-100">Tasks</h2>
+      <span id="taskCount" class="text-sm text-violet-100/70">0 tasks</span>
+    </div>
+
+    <ul id="taskList" class="space-y-3"></ul>
+
+    <p id="emptyMessage" class="py-6 text-center text-violet-100/60">No tasks added yet.</p>
+  </div>
+
+  <script>
+    const taskInput = document.getElementById("taskInput");
+    const addTaskBtn = document.getElementById("addTaskBtn");
+    const taskList = document.getElementById("taskList");
+    const taskCount = document.getElementById("taskCount");
+    const emptyMessage = document.getElementById("emptyMessage");
+
+    function updateTaskCount() {
+      const count = taskList.children.length;
+      taskCount.textContent = count === 1 ? "1 task" : `${count} tasks`;
+      emptyMessage.style.display = count === 0 ? "block" : "none";
+    }
+
+    function addTask() {
+      const taskText = taskInput.value.trim();
+
+      if (taskText === "") {
+        alert("Please enter a task!");
+        return;
+      }
+
+      const li = document.createElement("li");
+      li.className = "flex items-center justify-between gap-3 rounded-xl border border-violet-200/20 bg-slate-900/40 p-3 shadow-sm";
+
+      const contentDiv = document.createElement("div");
+      contentDiv.className = "flex min-w-0 items-center gap-3";
+
+      const checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.className = "h-5 w-5 accent-cyan-400";
+
+      const textSpan = document.createElement("span");
+      textSpan.textContent = taskText;
+      textSpan.className = "break-words font-medium text-white";
+
+      checkbox.addEventListener("change", function () {
+        textSpan.classList.toggle("line-through");
+        textSpan.classList.toggle("text-slate-400");
+      });
+
+      const deleteBtn = document.createElement("button");
+      deleteBtn.textContent = "Delete";
+      deleteBtn.className = "rounded-lg bg-red-500 px-3 py-1.5 text-sm font-semibold text-white transition hover:bg-red-400";
+
+      deleteBtn.addEventListener("click", function () {
+        li.remove();
+        updateTaskCount();
+      });
+
+      contentDiv.appendChild(checkbox);
+      contentDiv.appendChild(textSpan);
+
+      li.appendChild(contentDiv);
+      li.appendChild(deleteBtn);
+
+      taskList.appendChild(li);
+      taskInput.value = "";
+      taskInput.focus();
+      updateTaskCount();
+    }
+
+    addTaskBtn.addEventListener("click", addTask);
+
+    taskInput.addEventListener("keydown", function (event) {
+      if (event.key === "Enter") {
+        addTask();
+      }
+    });
+
+    updateTaskCount();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pranav Kale | Student Registration</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="min-h-screen bg-[radial-gradient(circle_at_top,_#e0f2fe,_#a78bfa_35%,_#1e1b4b_100%)] flex items-center justify-center p-4">
+
+    <div class="w-full max-w-md rounded-[2rem] border border-white/20 bg-white/10 p-6 shadow-2xl backdrop-blur-xl md:p-8">
+        <div class="mb-6 text-center">
+            <span class="inline-block rounded-full bg-violet-600/20 px-3 py-1 text-xs font-bold uppercase tracking-[0.2em] text-violet-100">Admission Portal</span>
+            <h2 class="mt-4 text-3xl font-black text-white">Student Registration</h2>
+            <p class="mt-2 text-violet-100/80">Create your account</p>
+        </div>
+
+        <form id="registrationForm" class="space-y-4">
+            <div>
+                <label class="mb-2 block text-sm font-semibold text-violet-100">Student Name</label>
+                <input type="text" id="name" class="w-full rounded-xl border border-violet-200/30 bg-slate-900/40 px-4 py-3 text-white placeholder:text-violet-100/40 outline-none transition focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/30">
+            </div>
+
+            <div>
+                <label class="mb-2 block text-sm font-semibold text-violet-100">Email</label>
+                <input type="text" id="email" class="w-full rounded-xl border border-violet-200/30 bg-slate-900/40 px-4 py-3 text-white placeholder:text-violet-100/40 outline-none transition focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/30">
+            </div>
+
+            <div>
+                <label class="mb-2 block text-sm font-semibold text-violet-100">Password</label>
+                <div class="flex">
+                    <input type="password" id="password" class="w-full rounded-l-xl border border-r-0 border-violet-200/30 bg-slate-900/40 px-4 py-3 text-white placeholder:text-violet-100/40 outline-none transition focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/30">
+                    <button type="button" id="showPassword" class="rounded-r-xl bg-violet-600 px-4 py-3 font-semibold text-white transition hover:bg-violet-500">
+                        Show
+                    </button>
+                </div>
+            </div>
+
+            <div>
+                <label class="mb-2 block text-sm font-semibold text-violet-100">Mobile Number</label>
+                <input type="text" id="mobile" class="w-full rounded-xl border border-violet-200/30 bg-slate-900/40 px-4 py-3 text-white placeholder:text-violet-100/40 outline-none transition focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/30">
+            </div>
+
+            <button type="submit" class="w-full rounded-xl bg-gradient-to-r from-cyan-500 to-violet-600 px-4 py-3 font-bold text-white shadow-lg shadow-cyan-500/20 transition hover:scale-[1.01]">
+                Register
+            </button>
+
+            <p id="message" class="mt-4 text-center text-sm"></p>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("showPassword").onclick = function() {
+            let password = document.getElementById("password");
+
+            if (password.type == "password") {
+                password.type = "text";
+                this.innerHTML = "Hide";
+            } else {
+                password.type = "password";
+                this.innerHTML = "Show";
+            }
+        };
+
+        document.getElementById("registrationForm").onsubmit = function(event) {
+            event.preventDefault();
+
+            let name = document.getElementById("name").value;
+            let email = document.getElementById("email").value;
+            let password = document.getElementById("password").value;
+            let mobile = document.getElementById("mobile").value;
+
+            let message = document.getElementById("message");
+
+            if (name == "" || email == "" || password == "" || mobile == "") {
+                message.innerHTML = "Please fill all fields.";
+                message.className = "mt-4 text-center text-sm text-red-300";
+                return;
+            }
+
+            if (!email.includes("@") || !email.includes(".")) {
+                message.innerHTML = "Enter a valid email.";
+                message.className = "mt-4 text-center text-sm text-red-300";
+                return;
+            }
+
+            if (password.length < 6) {
+                message.innerHTML = "Password must be at least 6 characters.";
+                message.className = "mt-4 text-center text-sm text-red-300";
+                return;
+            }
+
+            if (mobile.length != 10 || isNaN(mobile)) {
+                message.innerHTML = "Enter a valid 10-digit mobile number.";
+                message.className = "mt-4 text-center text-sm text-red-300";
+                return;
+            }
+
+            message.innerHTML = "Registration Successful!";
+            message.className = "mt-4 text-center text-sm text-green-300";
+        };
+    </script>
+
+</body>
+</html>
